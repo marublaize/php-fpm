@@ -1,14 +1,17 @@
+version: 3
+
 web:
  image: nginx:latest
  ports:
  - "80:80"
  volumes:
  - ./app:/app
- - ./nginx/conf.d:/etc/nginx/conf.d/
- links:
- - php
+ - ./nginx/conf.d:/etc/nginx/conf.d
+   # links:
+   # - php
 
 php:
  image: php:7-fpm
  volumes:
  - ./app:/app
+ - ./php-fpm.d/zz-log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
