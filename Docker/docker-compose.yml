@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+    - "8080:80"
+    volumes:
+    - ../app:/app
+    - ../nginx/conf.d:/etc/nginx/conf.d
+
+  php:
+    image: php:7-fpm-alpine
+    volumes:
+    - ../app:/app
+    - ../php-fpm.d/zz-log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
